@@ -98,7 +98,7 @@ func (r *Receiver) Receive(ctx context.Context) (*Message, error) {
 // acceptIfModeFirst auto-accepts a message if we are in mode first, otherwise it no-ops.
 func acceptIfModeFirst(ctx context.Context, r *Receiver, msg *Message) (*Message, error) {
 	// for ModeFirst, auto-accept the message
-	if receiverSettleModeValue(r.link.ReceiverSettleMode) == ModeSecond {
+	if receiverSettleModeValue(r.link.ReceiverSettleMode) == ModeSecond || r.link.receiverManualAck {
 		return msg, nil
 	}
 	if err := r.AcceptMessage(ctx, msg); err != nil {

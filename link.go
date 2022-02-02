@@ -57,6 +57,7 @@ type link struct {
 	linkCredit         uint32 // maximum number of messages allowed between flow updates
 	SenderSettleMode   *SenderSettleMode
 	ReceiverSettleMode *ReceiverSettleMode
+	receiverManualAck  bool
 	MaxMessageSize     uint64
 	detachReceived     bool
 	err                error // err returned on Close()

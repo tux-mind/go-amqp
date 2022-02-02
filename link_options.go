@@ -188,6 +188,18 @@ func LinkReceiverSettle(mode ReceiverSettleMode) LinkOption {
 	}
 }
 
+// LinkReceiverManualAck do not automatically send ACKs when in ModeFirst
+//
+// When the receiver mode is ModeFirst, ACKs wont be send on receive,
+// the user will be responsable to call Receiver.AcceptMessage to mark
+// the received message as settled.
+func LinkReceiverManualAck(value bool) LinkOption {
+	return func(l *link) error {
+		l.receiverManualAck = value
+		return nil
+	}
+}
+
 // LinkSelectorFilter sets a selector filter (apache.org:selector-filter:string) on the link source.
 func LinkSelectorFilter(filter string) LinkOption {
 	// <descriptor name="apache.org:selector-filter:string" code="0x0000468C:0x00000004"/>
